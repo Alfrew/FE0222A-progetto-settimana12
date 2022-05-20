@@ -27,7 +27,8 @@ import { ActivatedRoute, Params } from "@angular/router";
             <button mat-button (click)="onPostFavorite(movie)" *ngIf="!checkFavorite(movie)"><mat-icon>favorite_border</mat-icon></button>
             <button color="accent" mat-button (click)="onRemoveWatchlist(movie)" *ngIf="checkWatchList(movie)"><mat-icon>remove_red_eye</mat-icon></button>
             <button mat-button (click)="onPutWatchlist(movie)" *ngIf="!checkWatchList(movie)"><mat-icon>remove_red_eye</mat-icon></button>
-            <button mat-button [routerLink]="['/movies/top', movie.id]"><mat-icon>info</mat-icon></button>
+            <button mat-button *ngIf="path == 'top'" [routerLink]="['/movies/top', movie.id]"><mat-icon>info</mat-icon></button>
+            <button mat-button *ngIf="path == 'popular'" [routerLink]="['/movies/popular', movie.id]"><mat-icon>info</mat-icon></button>
           </mat-card-actions>
         </mat-card>
       </div>

@@ -18,35 +18,55 @@
     },
     {
       "email": "a@f.it",
-      "password": "$2a$10$hBP6q/kMYbHNhf4.tenen.t89Dfm7aWohn6DIpJzyRoeErUMeA5HW",
+      "password": "$2a$10$Wh6W78J9hXIpwgJHgqIvMujkVwDPOrPhMogOuz29ygXUZhzeZ30Gu",
       "name": "Alfredo",
       "watchlist": [
         {
-          "id": 460465,
-          "title": "Mortal Kombat",
-          "watched": false
+          "id": 19404,
+          "title": "Il coraggioso prenderà la sposa"
         },
         {
-          "id": 567189,
-          "title": "Senza rimorso",
-          "watched": false
+          "id": 680,
+          "title": "Pulp Fiction"
         },
         {
-          "id": 578701,
-          "title": "Quelli che mi vogliono morto",
-          "watched": false
+          "id": 496243,
+          "title": "Parasite"
         },
         {
-          "id": 615457,
-          "title": "Io sono Nessuno"
+          "id": 238,
+          "title": "Il padrino"
         },
         {
-          "id": 632357,
-          "title": "Il sacro male",
-          "watched": false
+          "id": 556574,
+          "title": "Hamilton"
+        },
+        {
+          "id": 724089,
+          "title": "Gabriel's Inferno Part II"
+        },
+        {
+          "id": 761053,
+          "title": "Gabriel's Inferno Part III"
         }
       ],
       "id": 2
+    },
+    {
+      "email": "a@l.it",
+      "password": "$2a$10$coiD2Til4NnHBl/6QAtgnu66rD67wAiRqiito3wN6BIWX3Yd/4jXW",
+      "name": "Alfrew",
+      "watchlist": [
+        {
+          "id": 460465,
+          "title": "Mortal Kombat"
+        },
+        {
+          "id": 567189,
+          "title": "Senza rimorso"
+        }
+      ],
+      "id": 3
     }
   ],
   "favorites": [
@@ -114,6 +134,11 @@
       "userId": 1,
       "movieId": 724089,
       "id": 37
+    },
+    {
+      "userId": 3,
+      "movieId": 460465,
+      "id": 38
     }
   ],
   "genres": [

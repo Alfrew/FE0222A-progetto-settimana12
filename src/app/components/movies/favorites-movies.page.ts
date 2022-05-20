@@ -1,9 +1,9 @@
-import { Component, OnInit } from "@angular/core";
 import { Subscription } from "rxjs";
-import { AuthService } from "src/app/auth/auth.service";
-import { Favorite } from "src/app/interfaces/favorite";
 import { Movie } from "src/app/interfaces/movie";
 import { MoviesService } from "./movies.service";
+import { Component, OnInit } from "@angular/core";
+import { Favorite } from "src/app/interfaces/favorite";
+import { AuthService } from "src/app/auth/auth.service";
 
 @Component({
   template: `

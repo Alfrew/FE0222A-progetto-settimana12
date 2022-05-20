@@ -1,8 +1,8 @@
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Params } from "@angular/router";
 import { Subscription } from "rxjs";
 import { Movie } from "src/app/interfaces/movie";
 import { MoviesService } from "./movies.service";
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Params } from "@angular/router";
 
 @Component({
   template: `

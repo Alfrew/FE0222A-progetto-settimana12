@@ -1,7 +1,7 @@
-import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { catchError, throwError } from "rxjs";
 import { User } from "src/app/interfaces/user";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable({
   providedIn: "root",

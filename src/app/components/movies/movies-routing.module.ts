@@ -1,8 +1,8 @@
+import { InfoPage } from "./info.page";
 import { NgModule } from "@angular/core";
+import { MoviesPage } from "./movies.page";
 import { RouterModule, Routes } from "@angular/router";
 import { FavoritesMoviesPage } from "./favorites-movies.page";
-import { InfoPage } from "./info.page";
-import { MoviesPage } from "./movies.page";
 
 const routes: Routes = [
   {
