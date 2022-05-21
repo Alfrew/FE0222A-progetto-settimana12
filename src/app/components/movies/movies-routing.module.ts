@@ -6,11 +6,11 @@ import { FavoritesMoviesPage } from "./favorites-movies.page";
 
 const routes: Routes = [
   {
-    path: "popular",
+    path: "top",
     component: MoviesPage,
   },
   {
-    path: "top",
+    path: "popular",
     component: MoviesPage,
   },
   {
@@ -18,11 +18,11 @@ const routes: Routes = [
     component: FavoritesMoviesPage,
   },
   {
-    path: "popular/:id",
+    path: "top/:id",
     component: InfoPage,
   },
   {
-    path: "top/:id",
+    path: "popular/:id",
     component: InfoPage,
   },
 ];

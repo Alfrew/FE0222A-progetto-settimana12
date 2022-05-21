@@ -2,78 +2,129 @@
   "users": [
     {
       "email": "n@p.com",
-      "password": "$2a$10$R5FG/spdK7cSyfel.GOBleNebeRZeZFLiUGW.lA/AEMwebvrzR/I2",
+      "password": "$2a$10$.HaCMH761snLDygTUkSeBOz5VCYPyVXKgkUQzCfHVel2qBK9sjfCm",
       "name": "nicola toledo",
-      "watchlist": [
-        {
-          "id": 696374,
-          "title": "Gabriel's Inferno"
-        },
-        {
-          "id": 278,
-          "title": "Le ali della libertà"
-        }
-      ],
       "id": 1
     },
     {
-      "email": "a@f.it",
-      "password": "$2a$10$Wh6W78J9hXIpwgJHgqIvMujkVwDPOrPhMogOuz29ygXUZhzeZ30Gu",
-      "name": "Alfredo",
-      "watchlist": [
-        {
-          "id": 19404,
-          "title": "Il coraggioso prenderà la sposa"
-        },
-        {
-          "id": 680,
-          "title": "Pulp Fiction"
-        },
-        {
-          "id": 496243,
-          "title": "Parasite"
-        },
-        {
-          "id": 238,
-          "title": "Il padrino"
-        },
-        {
-          "id": 556574,
-          "title": "Hamilton"
-        },
-        {
-          "id": 724089,
-          "title": "Gabriel's Inferno Part II"
-        },
-        {
-          "id": 761053,
-          "title": "Gabriel's Inferno Part III"
-        }
-      ],
+      "email": "al@fr.com",
+      "password": "$2a$10$jZNIN9WoykxVrGxgnPcauO6WzTiu.YDzuz9psN13gf0DDeYCLhYaC",
+      "name": "alfrew",
       "id": 2
-    },
+    }
+  ],
+  "watchLists": [
     {
-      "email": "a@l.it",
-      "password": "$2a$10$coiD2Til4NnHBl/6QAtgnu66rD67wAiRqiito3wN6BIWX3Yd/4jXW",
-      "name": "Alfrew",
-      "watchlist": [
+      "id": 1,
+      "list": [
         {
-          "id": 460465,
+          "movieId": 460465,
           "title": "Mortal Kombat"
         },
         {
-          "id": 567189,
+          "movieId": 567189,
           "title": "Senza rimorso"
+        },
+        {
+          "movieId": 389,
+          "title": "La parola ai giurati"
+        },
+        {
+          "movieId": 680,
+          "title": "Pulp Fiction"
+        }
+      ]
+    },
+    {
+      "list": [
+        {
+          "movieId": 615457,
+          "title": "Io sono Nessuno"
+        },
+        {
+          "movieId": 527774,
+          "title": "Raya e l'ultimo drago"
+        },
+        {
+          "movieId": 238,
+          "title": "Il padrino"
+        },
+        {
+          "movieId": 240,
+          "title": "Il padrino - Parte II"
+        },
+        {
+          "movieId": 496243,
+          "title": "Parasite"
+        },
+        {
+          "movieId": 680,
+          "title": "Pulp Fiction"
         }
       ],
-      "id": 3
+      "id": 2
     }
   ],
   "favorites": [
     {
+      "userId": 1,
+      "movieId": 460465,
+      "id": 1
+    },
+    {
+      "userId": 1,
+      "movieId": 567189,
+      "id": 2
+    },
+    {
+      "userId": 1,
+      "movieId": 632357,
+      "id": 3
+    },
+    {
+      "userId": 1,
+      "movieId": 615457,
+      "id": 4
+    },
+    {
+      "userId": 1,
+      "movieId": 238,
+      "id": 5
+    },
+    {
+      "userId": 1,
+      "movieId": 761053,
+      "id": 6
+    },
+    {
+      "userId": 1,
+      "movieId": 240,
+      "id": 7
+    },
+    {
+      "userId": 1,
+      "movieId": 238,
+      "id": 8
+    },
+    {
+      "userId": 2,
+      "movieId": 615457,
+      "id": 9
+    },
+    {
+      "userId": 2,
+      "movieId": 811367,
+      "id": 10
+    },
+    {
       "userId": 2,
       "movieId": 527774,
       "id": 11
+    },
+    {
+      "userId": 2,
+      "movieId": 238,
+      "id": 12
     },
     {
       "userId": 2,
@@ -87,58 +138,18 @@
     },
     {
       "userId": 2,
+      "movieId": 496243,
+      "id": 15
+    },
+    {
+      "userId": 2,
       "movieId": 592350,
       "id": 16
     },
     {
-      "userId": 1,
-      "movieId": 460465,
-      "id": 22
-    },
-    {
-      "userId": 1,
-      "movieId": 567189,
-      "id": 23
-    },
-    {
-      "userId": 1,
-      "movieId": 632357,
-      "id": 25
-    },
-    {
-      "userId": 2,
-      "movieId": 238,
-      "id": 32
-    },
-    {
-      "userId": 2,
-      "movieId": 811367,
-      "id": 33
-    },
-    {
-      "userId": 2,
-      "movieId": 496243,
-      "id": 34
-    },
-    {
       "userId": 2,
       "movieId": 680,
-      "id": 35
-    },
-    {
-      "userId": 1,
-      "movieId": 761053,
-      "id": 36
-    },
-    {
-      "userId": 1,
-      "movieId": 724089,
-      "id": 37
-    },
-    {
-      "userId": 3,
-      "movieId": 460465,
-      "id": 38
+      "id": 17
     }
   ],
   "genres": [

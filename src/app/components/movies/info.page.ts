@@ -6,12 +6,15 @@ import { ActivatedRoute, Params } from "@angular/router";
 
 @Component({
   template: `
+    <!-- Spinner and error message -->
     <mat-spinner color="primary" style="margin:0 auto" *ngIf="loading"></mat-spinner>
     <div class="center" *ngIf="!movie && !loading">
       <h2>Movie not found</h2>
     </div>
+
+    <!-- Movies card -->
     <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="movie">
-      <mat-card>
+      <mat-card style="width:50vw">
         <mat-card-header>
           <mat-card-title>{{ movie.title }}</mat-card-title>
         </mat-card-header>
@@ -21,7 +24,9 @@ import { ActivatedRoute, Params } from "@angular/router";
             Average score: {{ movie.vote_average }}/10 <br />
             by {{ movie.vote_count }} users
           </p>
+
           <p>Release Date: {{ movie.release_date }}</p>
+
           <p>
             Sinossi: <br />
             {{ movie.overview }}
@@ -43,17 +48,25 @@ import { ActivatedRoute, Params } from "@angular/router";
   ],
 })
 export class InfoPage implements OnInit {
-  movie!: Movie;
-  sub!: Subscription;
-  loading = true;
   path!: string;
-  error!: string;
+  movie!: Movie;
+  loading = true;
+  sub!: Subscription;
+
   constructor(private router: ActivatedRoute, private movieSrv: MoviesService) {
     setTimeout(() => {
       this.loading = false;
     }, 5000);
   }
+
   ngOnInit(): void {
+    this.onGetPath();
+  }
+
+  /**
+   * Get the path from the url to check if the movie is top-rated or popular
+   */
+  onGetPath() {
     this.sub = this.router.params.subscribe((params: Params) => {
       this.path = this.router.snapshot.url[0].path;
       const id = +params["id"];
@@ -66,17 +79,31 @@ export class InfoPage implements OnInit {
     });
   }
 
+  /**
+   * Get the specified top-rated movie by id from the server
+   * @param id of the movie
+   */
   onGetTop(id: number) {
     this.movieSrv.GetTop(id).subscribe((data) => {
       this.movie = data;
       this.loading = false;
     });
   }
-
+  /**
+   * Get the specified popular movie by id from the server
+   * @param id of the movie
+   */
   onGetPopular(id: number) {
     this.movieSrv.GetPopular(id).subscribe((data) => {
       this.movie = data;
       this.loading = false;
     });
+  }
+
+  /**
+   * Remove the subscription when the component is destroyed
+   */
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

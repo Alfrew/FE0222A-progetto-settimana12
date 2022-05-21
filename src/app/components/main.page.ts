@@ -1,10 +1,10 @@
-import { Component, OnInit } from "@angular/core";
 import { Subscription } from "rxjs";
+import { Component, OnInit } from "@angular/core";
 import { AuthService } from "../auth/auth.service";
 
 @Component({
   template: `
-    <mat-toolbar color="primary"> <h1>Header</h1> </mat-toolbar>
+    <mat-toolbar color="primary"> <h1>myMovies</h1> </mat-toolbar>
 
     <mat-sidenav-container>
       <mat-sidenav mode="side" opened>
@@ -112,9 +112,17 @@ import { AuthService } from "../auth/auth.service";
 export class MainPage implements OnInit {
   username!: string;
   sub!: Subscription;
+
   constructor(private authSrv: AuthService) {}
 
   ngOnInit(): void {
+    this.onGetUsername();
+  }
+
+  /**
+   * Get the user name
+   */
+  onGetUsername() {
     this.sub = this.authSrv.user$.subscribe((data) => {
       if (!data) {
         return;
@@ -123,11 +131,17 @@ export class MainPage implements OnInit {
     });
   }
 
+  /**
+   * Logout from the site and delete the localstorage
+   */
   onLogout() {
     this.authSrv.logout();
     this.username = "";
   }
 
+  /**
+   * Remove the subscription when the component is destroyed
+   */
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

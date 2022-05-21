@@ -5,6 +5,7 @@ import { BehaviorSubject, map, tap } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { AuthData } from "../interfaces/auth-data";
 import { JwtHelperService } from "@auth0/angular-jwt";
+import { WatchList } from "../interfaces/watch-list";
 
 @Injectable({
   providedIn: "root",
@@ -60,8 +61,16 @@ export class AuthService {
    * @param data user's data from the signup form
    * @returns the http post request
    */
-  signup(data: any) {
+  signup(data: User) {
     return this.http.post(`${this.URL}/register`, data);
+  }
+
+  /**
+   * create a new watchlist for the user
+   * @returns
+   */
+  newWatchlist() {
+    return this.http.post<WatchList>(`${this.URL}/watchLists`, { list: [] });
   }
 
   /**

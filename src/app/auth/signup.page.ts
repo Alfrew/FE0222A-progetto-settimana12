@@ -1,7 +1,6 @@
-import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { User } from "../interfaces/user";
 import { AuthService } from "./auth.service";
+import { Component, OnInit } from "@angular/core";
 
 @Component({
   template: `
@@ -14,12 +13,15 @@ import { AuthService } from "./auth.service";
           <mat-card-content>
             <mat-form-field class="full-width">
               <input matInput placeholder="Name" ngModel name="name" type="text" required />
+              <mat-error *ngIf="errorMessage">{{ errorMessage }}!</mat-error>
             </mat-form-field>
             <mat-form-field class="full-width">
               <input matInput placeholder="Email" ngModel name="email" type="email" required />
+              <mat-error *ngIf="errorMessage">{{ errorMessage }}!</mat-error>
             </mat-form-field>
             <mat-form-field class="full-width">
               <input matInput placeholder="Password" ngModel name="password" type="password" required />
+              <mat-error *ngIf="errorMessage">{{ errorMessage }}!</mat-error>
             </mat-form-field>
           </mat-card-content>
           <button mat-stroked-button color="primary" class="btn-block">Register</button>
@@ -136,25 +138,22 @@ import { AuthService } from "./auth.service";
 })
 export class SignupPage implements OnInit {
   errorMessage = undefined;
+
   constructor(private authSrv: AuthService, private router: Router) {}
 
   ngOnInit(): void {}
 
   async onSignup(form: any) {
     try {
-      const user = {
-        name: form.value.name,
-        email: form.value.email,
-        password: form.value.password,
-        watchlist: [],
-      };
-      await this.authSrv.signup(user).toPromise();
+      await this.authSrv.signup(form.value).toPromise();
+      await this.authSrv.newWatchlist().toPromise();
       form.reset();
       this.errorMessage = undefined;
       this.router.navigate(["/login"]);
     } catch (error: any) {
-      this.errorMessage = error;
-      console.error(error);
+      this.errorMessage = error.error;
+      alert(this.errorMessage);
+      console.error(this.errorMessage);
     }
   }
 }

@@ -3,14 +3,13 @@ import { AppComponent } from "./app.component";
 import { AuthModule } from "./auth/auth.module";
 import { MainPage } from "./components/main.page";
 import { MaterialModule } from "./material.module";
-import { SharedModule } from "./shared/shared.module";
 import { AppRoutingModule } from "./app-routing.module";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [AppComponent, MainPage],
-  imports: [BrowserModule, BrowserAnimationsModule, AuthModule, SharedModule, AppRoutingModule, MaterialModule],
+  imports: [BrowserModule, BrowserAnimationsModule, AuthModule, AppRoutingModule, MaterialModule],
   providers: [],
   bootstrap: [AppComponent],
 })

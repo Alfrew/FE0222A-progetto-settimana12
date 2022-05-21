@@ -4,7 +4,7 @@ import { AuthService } from "./auth.service";
 
 @Component({
   template: `
-    <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+    <div class="login-wrapper" fxLayout="column" fxLayoutAlign="center center">
       <mat-card class="box">
         <mat-card-header>
           <mat-card-title>Log in</mat-card-title>
@@ -13,9 +13,11 @@ import { AuthService } from "./auth.service";
           <mat-card-content>
             <mat-form-field class="full-width">
               <input matInput placeholder="Email" ngModel name="email" type="email" required />
+              <mat-error *ngIf="errorMessage">{{ errorMessage }}!</mat-error>
             </mat-form-field>
             <mat-form-field class="full-width">
               <input matInput placeholder="Password" ngModel name="password" type="password" required />
+              <mat-error *ngIf="errorMessage">{{ errorMessage }}!</mat-error>
             </mat-form-field>
           </mat-card-content>
           <button mat-stroked-button color="primary" class="btn-block">Log in</button>
@@ -138,8 +140,7 @@ export class LoginPage implements OnInit {
       this.errorMessage = undefined;
       this.router.navigate(["/movies/popular"]);
     } catch (error: any) {
-      this.errorMessage = error;
-      console.error(error);
+      this.errorMessage = error.error;
     }
   }
 }

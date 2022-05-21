@@ -4,6 +4,5 @@ export interface AuthData {
     email: string;
     id: number;
     name: string;
-    surname: string;
   };
 }

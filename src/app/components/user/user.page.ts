@@ -1,32 +1,35 @@
-import { Component, OnInit } from "@angular/core";
 import { Subscription } from "rxjs";
+import { Component, OnInit } from "@angular/core";
 import { AuthService } from "src/app/auth/auth.service";
-import { AuthData } from "src/app/interfaces/auth-data";
-import { User } from "src/app/interfaces/user";
+import { MoviesService } from "../movies/movies.service";
+import { WatchList } from "src/app/interfaces/watch-list";
 import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
-import { Movie } from "src/app/interfaces/movie";
-import { UserService } from "./user.service";
-import { WatchMovie } from "src/app/interfaces/watch-movie";
 
 @Component({
   template: `
-    <div fxLayout="column" fxLayoutAlign="center center" *ngIf="user">
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <!-- Error message -->
+      <div class="center" *ngIf="!userName && !loading">
+        <h2>User not found</h2>
+      </div>
+      <!-- User info card -->
       <mat-card>
         <mat-card-header>
           <mat-card-title>User Info</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <p>Name: {{ user.name }}</p>
-          <p>Email: {{ user.email }}</p>
+          <p>Name: {{ userName | titlecase }}</p>
+          <p>Email: {{ userMail }}</p>
         </mat-card-content>
       </mat-card>
-
-      <div>
+      <!-- Watchlist drag and drop -->
+      <mat-spinner color="primary" style="margin:0 auto" *ngIf="!watchlist"></mat-spinner>
+      <div *ngIf="watchlist">
         <h2>Watch List</h2>
         <div cdkDropList class="list" (cdkDropListDropped)="drop($event)">
-          <div class="box" *ngIf="user.watchlist.length == 0">No films in your watchlist</div>
-          <div class="box" *ngFor="let movie of user.watchlist" cdkDrag>
-            {{ movie.title }} <button mat-button (click)="onRemoveWatchlist(movie)"><mat-icon>closed</mat-icon></button>
+          <div class="box" *ngIf="watchlist.list.length == 0">No films in your watchlist</div>
+          <div class="box" *ngFor="let movie of watchlist.list" cdkDrag>
+            {{ movie.title }} <button mat-button (click)="onRemoveWatchlist(movie.movieId)"><mat-icon>closed</mat-icon></button>
           </div>
         </div>
       </div>
@@ -85,41 +88,76 @@ import { WatchMovie } from "src/app/interfaces/watch-movie";
   ],
 })
 export class UserPage implements OnInit {
-  user!: User;
-  sub!: Subscription;
+  loading = true;
   userId!: number;
-  constructor(private authSrv: AuthService, private userSrv: UserService) {}
+  userName!: string;
+  userMail!: string;
+  sub!: Subscription;
+  watchlist!: WatchList;
+
+  constructor(private authSrv: AuthService, private movieSrv: MoviesService) {
+    setTimeout(() => {
+      this.loading = false;
+    }, 5000);
+  }
 
   ngOnInit(): void {
+    this.onGetUserData();
+    this.onGetWatchlist(this.userId);
+    this.loading = false;
+  }
+
+  /**
+   * Get the user data
+   */
+  onGetUserData() {
     this.sub = this.authSrv.user$.subscribe((data) => {
       if (!data) {
         return;
       }
+      this.userName = data.user.name;
+      this.userMail = data.user.email;
       this.userId = data.user.id;
     });
-    this.onGetUser(this.userId);
   }
 
-  onGetUser(id: number) {
-    this.sub = this.userSrv.GetUser(id).subscribe((data) => {
-      this.user = data;
-    });
-  }
-
+  /**
+   * Rearrange the watchlist elements order by the drag and drop
+   * @param event
+   */
   drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.user.watchlist, event.previousIndex, event.currentIndex);
+    moveItemInArray(this.watchlist.list, event.previousIndex, event.currentIndex);
     this.onPutWatchlist();
   }
 
+  /**
+   * Put the local updated watchlist
+   */
   onPutWatchlist() {
-    this.sub = this.userSrv.PutWatchlist(this.userId, this.user).subscribe();
+    this.sub = this.movieSrv.PutWatchlist(this.userId, this.watchlist).subscribe();
+  }
+  /**
+   * Check if the movie is in the user's watchlist by id
+   * @param movie to check
+   * @returns the movie if the movie is in the watchlist or undefined
+   */
+  onGetWatchlist(id: number) {
+    this.sub = this.movieSrv.GetWatchlist(id).subscribe((data) => {
+      this.watchlist = data;
+    });
+  }
+  /**
+   * Put the update watchlist with the removed movie on the server
+   * @param movieId
+   */
+  onRemoveWatchlist(movieId: number) {
+    this.watchlist.list = this.watchlist.list.filter((movieW) => movieW.movieId !== movieId);
+    this.onPutWatchlist();
   }
 
-  onRemoveWatchlist(movie: WatchMovie) {
-    this.user.watchlist = this.user.watchlist.filter((movieW) => movieW.id !== movie.id);
-    this.sub = this.userSrv.PutWatchlist(this.userId, this.user).subscribe();
-  }
-
+  /**
+   * Remove the subscription when the component is destroyed
+   */
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
