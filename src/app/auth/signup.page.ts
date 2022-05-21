@@ -152,8 +152,6 @@ export class SignupPage implements OnInit {
       this.router.navigate(["/login"]);
     } catch (error: any) {
       this.errorMessage = error.error;
-      alert(this.errorMessage);
-      console.error(this.errorMessage);
     }
   }
 }
